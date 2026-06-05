@@ -9,6 +9,8 @@ mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB Atlas Connected ✅"))
 .catch(err => console.log(err));
 
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth", authRoutes);
 app.get("/", (req, res) => {
   res.send("API Running");
 });
