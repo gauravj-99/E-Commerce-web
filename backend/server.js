@@ -1,24 +1,20 @@
-require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const app = express();
 app.use(express.json());
 
+const authRoutes = require("./routes/authRoutes");
+const productRoutes = require("./routes/productRoutes");
+const cartRoutes = require("./routes/cartRoutes");
+
+app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/cart", cartRoutes);
+
 mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Atlas Connected ✅"))
+.then(() => console.log("MongoDB Connected ✅"))
 .catch(err => console.log(err));
 
-const authRoutes = require("./routes/authRoutes");
-app.use("/api/auth", authRoutes);
-app.get("/", (req, res) => {
-  res.send("API Running");
-});
-
-const productRoutes = require("./routes/productRoutes");
-
-app.use("/api/products", productRoutes);
-
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
-});
+app.listen(5000, () => console.log("Server running"));
