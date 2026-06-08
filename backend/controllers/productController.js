@@ -1,6 +1,5 @@
 const Product = require("../models/Product");
 
-// ✅ Add Product
 exports.addProduct = async (req, res) => {
   try {
     const { name, price, description, category, stock } = req.body;
@@ -31,12 +30,10 @@ exports.getProducts = async (req, res) => {
 
     let query = {};
 
-    // ✅ Search by name
     if (keyword) {
       query.name = { $regex: keyword, $options: "i" };
     }
 
-    // ✅ Filter by category
     if (category) {
       query.category = category;
     }
