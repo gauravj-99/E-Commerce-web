@@ -9,13 +9,14 @@ const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
-app.use("/api/orders", orderRoutes);
+
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/orders", orderRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Connected ✅"))
-.catch(err => console.log(err));
+  .then(() => console.log("MongoDB Connected ✅"))
+  .catch(err => console.log(err));
 
 app.listen(5000, () => console.log("Server running"));
