@@ -4,42 +4,56 @@ import { useEffect, useState } from "react";
 function Products() {
   const [products, setProducts] = useState([]);
 
-  // ✅ Fetch products
   useEffect(() => {
     axios.get("http://localhost:5000/api/products")
-      .then(res => setProducts(res.data));
+      .then(res => setProducts(res.data))
+      .catch(err => console.log(err));
   }, []);
 
-  // ✅ Add to cart
   const addToCart = async (id) => {
     const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please login first");
+      return;
+    }
 
     await axios.post(
       "http://localhost:5000/api/cart/add",
       {
-        userId: "PASTE_YOUR_USER_ID",
         productId: id,
         quantity: 1
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: "Bearer " + token
         }
       }
     );
 
-    alert("Added to cart ✅");
+    alert("Added to cart");
+  };
+
+  const styles = {
+    grid: {
+      display: "grid",
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gap: "20px",
+      padding: "20px"
+    },
+    card: {
+      border: "1px solid #ddd",
+      padding: "20px",
+      textAlign: "center"
+    }
   };
 
   return (
-    <div>
-      <h2>Products</h2>
-
-      {products.map(p => (
-        <div key={p._id}>
+    <div style={styles.grid}>
+      {products.map((p) => (
+        <div key={p._id} style={styles.card}>
           <h3>{p.name}</h3>
-          <p>Price: {p.price}</p>
-
+          <p>₹{p.price}</p>
           <button onClick={() => addToCart(p._id)}>
             Add to Cart
           </button>

@@ -14,28 +14,41 @@ function Login() {
     localStorage.setItem("token", res.data.token);
     alert("Login successful ✅");
 
-    // redirect manually (simple)
     window.location.href = "/products";
   };
 
   return (
-    <div>
+    <div style={styles.container}>
       <h2>Login</h2>
 
-      <input 
-        placeholder="Email" 
-        onChange={(e) => setEmail(e.target.value)} 
+      <input
+        placeholder="Email"
+        onChange={(e) => setEmail(e.target.value)}
       />
 
-      <input 
-        placeholder="Password" 
+      <input
+        placeholder="Password"
         type="password"
-        onChange={(e) => setPassword(e.target.value)} 
+        onChange={(e) => setPassword(e.target.value)}
       />
 
       <button onClick={login}>Login</button>
+
+      <p>
+        New user? <a href="/register">Register here</a>
+      </p>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    width: "300px",
+    margin: "100px auto",
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px"
+  }
+};
 
 export default Login;
