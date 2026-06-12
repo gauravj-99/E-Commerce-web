@@ -38,7 +38,6 @@ exports.placeOrder = async (req, res) => {
   }
 };
 
-// Place order immediately for a single product (bypass cart)
 exports.placeOrderNow = async (req, res) => {
   try {
     const userId = (req.user && req.user._id) || req.body.userId;
@@ -60,7 +59,7 @@ exports.placeOrderNow = async (req, res) => {
 
     await order.save();
 
-    res.json({ message: "Order placed successfully ✅", order });
+    res.json({ message: "Order placed successfully ", order });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

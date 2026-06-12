@@ -12,8 +12,8 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Login />} /> ✅
-        <Route path="/register" element={<Register />} /> ✅
+        <Route path="/" element={<Login />} /> 
+        <Route path="/register" element={<Register />} /> 
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/orders" element={<Orders />} />

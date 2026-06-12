@@ -12,7 +12,7 @@ function Login() {
     });
 
     localStorage.setItem("token", res.data.token);
-    alert("Login successful ✅");
+    alert("Login successful");
 
     window.location.href = "/products";
   };

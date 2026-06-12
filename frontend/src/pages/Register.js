@@ -13,7 +13,7 @@ function Register() {
       password
     });
 
-    alert("Registered ✅");
+    alert("Registered ");
     window.location.href = "/";
   };
 
