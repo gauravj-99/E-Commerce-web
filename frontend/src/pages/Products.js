@@ -34,6 +34,28 @@ function Products() {
     alert("Added to cart");
   };
 
+  const orderNow = async (id) => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please login first");
+      return;
+    }
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/orders/place-now",
+        { productId: id, quantity: 1 },
+        { headers: { Authorization: "Bearer " + token } }
+      );
+      alert("Order placed: " + (res.data.message || "success"));
+      window.location.href = "/orders";
+    } catch (err) {
+      console.error("Order now error:", err.response || err.message || err);
+      alert("Could not place order");
+    }
+  };
+
   const styles = {
     grid: {
       display: "grid",
@@ -54,9 +76,10 @@ function Products() {
         <div key={p._id} style={styles.card}>
           <h3>{p.name}</h3>
           <p>₹{p.price}</p>
-          <button onClick={() => addToCart(p._id)}>
-            Add to Cart
-          </button>
+          <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
+            <button onClick={() => addToCart(p._id)}>Add to Cart</button>
+            <button onClick={() => orderNow(p._id)}>Order Now</button>
+          </div>
         </div>
       ))}
     </div>

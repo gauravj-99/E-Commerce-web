@@ -11,6 +11,8 @@ const { protect } = require("../middleware/authMiddleware");
 
 router.post("/add", protect, addToCart);
 
+router.get("/", protect, getCart);
+
 router.get("/:userId", protect, getCart);
 
 router.put("/update", protect, updateCart);

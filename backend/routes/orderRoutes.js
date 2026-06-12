@@ -3,9 +3,14 @@ const router = express.Router();
 
 const {
   placeOrder,
+  placeOrderNow,
   getUserOrders
 } = require("../controllers/orderController");
-router.post("/place", placeOrder);
-router.get("/:userId", getUserOrders);
+const { protect } = require("../middleware/authMiddleware");
+
+router.post("/place", protect, placeOrder);
+router.post("/place-now", protect, placeOrderNow);
+router.get("/", protect, getUserOrders);
+router.get("/:userId", protect, getUserOrders);
 
 module.exports = router;
