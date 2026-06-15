@@ -18,7 +18,7 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected ✅"))
+  .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
 app.listen(5000, () => console.log("Server running"));
