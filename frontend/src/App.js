@@ -6,7 +6,6 @@ import Cart from "./pages/Cart";
 import Orders from "./pages/Orders";
 import AddProduct from "./pages/AddProduct";
 import Navbar from "./Components/Navbar";
-
 function App() {
   return (
     <BrowserRouter>
